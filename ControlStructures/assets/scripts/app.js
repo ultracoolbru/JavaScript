@@ -2,6 +2,10 @@ const defaultResult = 0;
 let currentResult = defaultResult;
 let logEntries = [];
 
+document.addEventListener('DOMContentLoaded', () => {
+    userInput.focus();
+});
+
 // ` is called a template literal
 // let calculationDescription = `(${defaultResult} + ${currentResult}) * 3 / 2 - 1`;
 
@@ -40,44 +44,59 @@ function logEntry(operation, initialResult, enteredNumber, currentResult) {
     console.log(logEntries);
 }
 
-// Addition function.
-function add() {
+// Calculate the result.
+function calculateRestult(calculationType) {
     const enteredNumber = getUserNumberInput();
     const initialResult = currentResult;
-    currentResult += enteredNumber;
-    createAndWriteOutput('+', initialResult, enteredNumber);
+    let mathOperator;
+
+    if (calculationType === 'ADD') {
+        currentResult += enteredNumber;
+        mathOperator = '+';
+    } else if (calculationType === 'SUBTRACT') {
+        currentResult -= enteredNumber;
+        mathOperator = '-';
+    } else if (calculationType === 'MULTIPLY') {
+        currentResult *= enteredNumber;
+        mathOperator = '*';
+    } else {
+        currentResult /= enteredNumber;
+        mathOperator = '/';
+    }
+
+    if (calculationType !== 'ADD' &&
+        calculationType !== 'SUBTRACT' &&
+        calculationType !== 'MULTIPLY' &&
+        calculationType !== 'DIVIDE' ||
+        // Truthy and falsy values
+        !enteredNumber) {
+        return;
+    }
+
+    createAndWriteOutput(mathOperator, initialResult, enteredNumber);
+    logEntry(calculationType, initialResult, enteredNumber, currentResult);
     clearAndFocus();
-    logEntry('ADD', initialResult, enteredNumber, currentResult);
+}
+
+// Addition function.
+function add() {
+    calculateRestult('ADD');
+
 }
 
 // Subtract function.
 function subtract() {
-    const enteredNumber = getUserNumberInput();
-    const initialResult = currentResult;
-    currentResult -= enteredNumber;
-    createAndWriteOutput('-', initialResult, enteredNumber);
-    clearAndFocus();
-    logEntry('SUBTRACT', initialResult, enteredNumber, currentResult);
+    calculateRestult('SUBTRACT');
 }
 
 // Multiplication function.
 function multiply() {
-    const enteredNumber = getUserNumberInput();
-    const initialResult = currentResult;
-    currentResult *= enteredNumber;
-    createAndWriteOutput('*', initialResult, enteredNumber);
-    clearAndFocus();
-    logEntry('MULTIPLY', initialResult, enteredNumber, currentResult);
+    calculateRestult('MULTIPLY');
 }
 
 // Division function.
 function divide() {
-    const enteredNumber = getUserNumberInput();
-    const initialResult = currentResult;
-    currentResult /= enteredNumber;
-    createAndWriteOutput('/', initialResult, enteredNumber);
-    clearAndFocus();
-    logEntry('DIVIDE', initialResult, enteredNumber, currentResult);
+    calculateRestult('DIVIDE');
 }
 
 // Event listeners.
@@ -85,6 +104,4 @@ addBtn.addEventListener('click', add);
 subtractBtn.addEventListener('click', subtract);
 multiplyBtn.addEventListener('click', multiply);
 divideBtn.addEventListener('click', divide);
-document.addEventListener('DOMContentLoaded', () => {
-    userInput.focus();
-});
+

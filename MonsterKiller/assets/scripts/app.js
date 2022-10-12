@@ -128,10 +128,84 @@ function healPlayerHandler() {
     endRound();
 }
 
+function printLogHandler() {
+    // While loop.
+    let j = 0;
+    while (j < 3) {
+        console.log(j);
+        j++;
+    }
+
+    // Do while loop.
+    let k = 0;
+    do {
+        console.log(k);
+        k++;
+    } while (k < 3);
+
+    // break statement.
+    let l = 0;
+    do {
+        console.log(l);
+
+        if (l === 1) {
+            break;
+        }
+
+        l++;
+    } while (l < 3);
+
+    // continue statement.
+    let m = 0;
+    do {
+        m++;
+        console.log(m);
+        if (m === 1) {
+            console.log('CONTINUE');
+            continue;
+        }
+    } while (m < 3);
+
+    // Labelled statement.
+    let n = 0;
+    outerWhile: do {
+        n++;
+        console.log(n);
+        if (n === 1) {
+            let m = 0;
+            innerWhile: do {
+                m++;
+                console.log(m);
+                if (m === 1) {
+                    console.log('Exit outer while loop');
+                    break outerWhile;
+                }
+            } while (m < 3);
+        }
+    } while (n < 3);
+
+    // Generic for loop.
+    for (let i = 0; i < battleLog.length; i++) {
+        const log = battleLog[i];
+        console.log(log);   
+    }
+
+    // For of loop.
+    for (const log of battleLog) {
+        console.log(log.event);
+    }
+
+    // For in loop.
+    for (const key in battleLog) {
+        if (Object.hasOwnProperty.call(battleLog, key)) {
+            const logEntry = battleLog[key];
+            console.log(logEntry);
+        }
+    }
+}
+
 // Button event listeners.
 attackBtn.addEventListener('click', attackHandler);
 strongAttackBtn.addEventListener('click', strongAttackHandler);
 healBtn.addEventListener('click', healPlayerHandler);
-logBtn.addEventListener('click', () => {
-    console.log(battleLog);
-});
+logBtn.addEventListener('click', printLogHandler);

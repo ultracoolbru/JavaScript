@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "file:///C:/Users/edwar/source/repos/JavaScript/MonsterKiller/index.html",
+            "url": "file:///C:/Users/edwar/source/repos/JavaScript/BehindTheScenes/index.html",
             "webRoot": "${workspaceFolder}"
         }
     ]

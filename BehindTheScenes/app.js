@@ -1,3 +1,17 @@
+'use strict';
+
+function getName() {
+    return prompt('What is your name?');
+}
+
+function sayHello() {
+    const userName = getName();
+    console.log('Hello ' + userName);
+}
+
+sayHello();
+
+
 let userName = 'Ed';
 
 // Vars exist in the global and function scope.
@@ -31,3 +45,18 @@ greet();
 // This will generate an error because age is not accessible outside of the function.
 // console.log(age);
 
+function myStrictFunction() {
+    // Function-level strict mode syntax
+    'use strict';
+    function nested() {
+        return 'And so am I!';
+    }
+    return `Hi! I'm a strict mode function! ${nested()}`;
+}
+console.log(myStrictFunction());
+
+function myNotStrictFunction() {
+    return "I'm not strict.";
+}
+
+console.log(myNotStrictFunction());

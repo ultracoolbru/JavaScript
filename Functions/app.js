@@ -111,8 +111,16 @@ const subtractUp = function() {
     return sum;
 }
 
-const showResult = (result) => {
-    console.log('Result after adding all numbers is: ' + result);
+const doSubtract = (resultHandler, ...numbers) => {
+    let sum = 0;    
+    for (const num of numbers) {
+        sum -= num;
+    }
+    return resultHandler(sum);
+}
+
+const showResult = (message, result) => {
+    console.log(message + ' ' + result);
 }
 
 
@@ -123,4 +131,5 @@ console.log(subtractUp());
 console.log(sumUp(1, 5, 10, -3, 6, 10, 25, 88));
 console.log(subtractUp());
 
-doSum(showResult, 1, 5, 10, -3, 6, 10, 25, 88);
+doSum(showResult.bind(this, ['The results of adding are: ']), 1, 5, 10, -3, 6, 10, 25, 88);
+doSubtract(showResult.bind(this, ['The results of subtracting are: ']), 1, 10, 15, 20);

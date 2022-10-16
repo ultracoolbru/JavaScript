@@ -37,51 +37,82 @@ function logEntry(operation, initialResult, enteredNumber, currentResult) {
     console.log(logEntries);
 }
 
-// Addition function.
-function add() {
-    const enteredNumber = getUserNumberInput();
-    const initialResult = currentResult;
-    currentResult += enteredNumber;
-    createAndWriteOutput('+', initialResult, enteredNumber);
-    clearAndFocus();
-    logEntry('ADD', initialResult, enteredNumber, currentResult);
-}
+// // Addition function.
+// function add() {
+//     const enteredNumber = getUserNumberInput();
+//     const initialResult = currentResult;
+//     currentResult += enteredNumber;
+//     createAndWriteOutput('+', initialResult, enteredNumber);
+//     clearAndFocus();
+//     logEntry('ADD', initialResult, enteredNumber, currentResult);
+// }
 
-// Subtract function.
-function subtract() {
-    const enteredNumber = getUserNumberInput();
-    const initialResult = currentResult;
-    currentResult -= enteredNumber;
-    createAndWriteOutput('-', initialResult, enteredNumber);
-    clearAndFocus();
-    logEntry('SUBTRACT', initialResult, enteredNumber, currentResult);
-}
+// // Subtract function.
+// function subtract() {
+//     const enteredNumber = getUserNumberInput();
+//     const initialResult = currentResult;
+//     currentResult -= enteredNumber;
+//     createAndWriteOutput('-', initialResult, enteredNumber);
+//     clearAndFocus();
+//     logEntry('SUBTRACT', initialResult, enteredNumber, currentResult);
+// }
 
-// Multiplication function.
-function multiply() {
-    const enteredNumber = getUserNumberInput();
-    const initialResult = currentResult;
-    currentResult *= enteredNumber;
-    createAndWriteOutput('*', initialResult, enteredNumber);
-    clearAndFocus();
-    logEntry('MULTIPLY', initialResult, enteredNumber, currentResult);
-}
+// // Multiplication function.
+// function multiply() {
+//     const enteredNumber = getUserNumberInput();
+//     const initialResult = currentResult;
+//     currentResult *= enteredNumber;
+//     createAndWriteOutput('*', initialResult, enteredNumber);
+//     clearAndFocus();
+//     logEntry('MULTIPLY', initialResult, enteredNumber, currentResult);
+// }
 
-// Division function.
-function divide() {
+// // Division function.
+// function divide() {
+//     const enteredNumber = getUserNumberInput();
+//     const initialResult = currentResult;
+//     currentResult /= enteredNumber;
+//     createAndWriteOutput('/', initialResult, enteredNumber);
+//     clearAndFocus();
+//     logEntry('DIVIDE', initialResult, enteredNumber, currentResult);
+// }
+
+function calculate(operation) {
     const enteredNumber = getUserNumberInput();
     const initialResult = currentResult;
-    currentResult /= enteredNumber;
-    createAndWriteOutput('/', initialResult, enteredNumber);
+    let mathOperator;
+
+    if (operation === 'ADD') {
+        currentResult += enteredNumber;
+        mathOperator = '+';
+    } else if (operation === 'SUBTRACT') {
+        currentResult -= enteredNumber;
+        mathOperator = '-';
+    } else if (operation === 'MULTIPLY') {
+        currentResult *= enteredNumber;
+        mathOperator = '*';
+    } else if (operation === 'DIVIDE') {
+        currentResult /= enteredNumber;
+        mathOperator = '/';
+    }
+
+    createAndWriteOutput(mathOperator, initialResult, enteredNumber);
     clearAndFocus();
-    logEntry('DIVIDE', initialResult, enteredNumber, currentResult);
+    logEntry(operation, initialResult, enteredNumber, currentResult);
 }
 
 // Event listeners.
-addBtn.addEventListener('click', add);
-subtractBtn.addEventListener('click', subtract);
-multiplyBtn.addEventListener('click', multiply);
-divideBtn.addEventListener('click', divide);
+// addBtn.addEventListener('click', add);
+// subtractBtn.addEventListener('click', subtract);
+// multiplyBtn.addEventListener('click', multiply);
+// divideBtn.addEventListener('click', divide);
+
+// Pre-configured function binding with the bind() method.
+// Due to bind, the add, subtract etc. functions are no longer required, because the logic now resides in the calculate() function.
+addBtn.addEventListener('click', calculate.bind(this, 'ADD'));
+subtractBtn.addEventListener('click', calculate.bind(this, 'SUBTRACT'));
+multiplyBtn.addEventListener('click', calculate.bind(this, 'MULTIPLY'));
+divideBtn.addEventListener('click', calculate.bind(this, 'DIVIDE'));
 document.addEventListener('DOMContentLoaded', () => {
     userInput.focus();
 });

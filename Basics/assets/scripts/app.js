@@ -112,7 +112,7 @@ function calculate(operation) {
 addBtn.addEventListener('click', calculate.bind(this, 'ADD'));
 subtractBtn.addEventListener('click', calculate.bind(this, 'SUBTRACT'));
 multiplyBtn.addEventListener('click', calculate.bind(this, 'MULTIPLY'));
-divideBtn.addEventListener('click', calculate.bind(this, 'DIVIDE'));
+divideBtn.addEventListener('click', calculate.bind(this, 'DIVIDE'))
 document.addEventListener('DOMContentLoaded', () => {
     userInput.focus();
 });

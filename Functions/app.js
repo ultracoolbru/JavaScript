@@ -50,6 +50,10 @@ startGameBtn.addEventListener('click', () => {
     const computerChoice = getComputerChoice();
     let winner;
 
+    if (gameIsRunning) {
+        return;
+    }
+
     if (playerChoice) {
         winner = getWinner(computerChoice, playerChoice);
     } else {
@@ -88,6 +92,12 @@ const sumUp = (...numbers) => {
     }
 
     return sum;
+} 
+
+// Example of a callback function.
+const doSum = (resultHandler, ...numbers) => {
+    const sum = sumUp(...numbers);
+    resultHandler(sum);
 }
 
 // Spread operator (...) is used to split up array elements or object properties.
@@ -101,8 +111,16 @@ const subtractUp = function() {
     return sum;
 }
 
+const showResult = (result) => {
+    console.log('Result after adding all numbers is: ' + result);
+}
+
+
+
 console.log(sumUp(1, 5, 10, -3, 6, 10));
 console.log(subtractUp());
 
 console.log(sumUp(1, 5, 10, -3, 6, 10, 25, 88));
 console.log(subtractUp());
+
+doSum(showResult, 1, 5, 10, -3, 6, 10, 25, 88);

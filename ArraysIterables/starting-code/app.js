@@ -173,3 +173,89 @@ const taxAdjustedPrices2 = prices.map((price, index, prices) => {
     return priceObj;
 });
 console.log(taxAdjustedPrices2);
+
+// Sort on its own converts the values to strings and sorts them alphabetically and in this example, 
+// it will sort the prices in ascending order.
+const sortedPrices = prices.sort();
+console.log(sortedPrices);
+
+// This will sort the prices in descending order.
+const ascSortedPrices = prices.sort((a, b) => {
+    // If you want to reverse the results, you can change the return values as below.
+    // Then you don't need to use the reverse function as outlined in the console.log below.
+    // if (a > b) {
+    //     return -1;  
+    // } else if (a === b) {
+    //     return 0;
+    // } else {
+    //     return 1;
+    // }
+
+    if (a > b) {
+        return 1;  
+    } else if (a === b) {
+        return 0;
+    } else {
+        return -1;
+    }
+});
+console.log(ascSortedPrices);
+// The reverse function will reverse the order of the elements in the array.
+console.log(ascSortedPrices.reverse());
+
+const filteredArray = prices.filter((price, index, prices) => {
+    // console.log(price);
+    // console.log(index);
+    // console.log(prices);
+    return price > 6; // Must return a boolean, so this will return all prices that are greater than 6.
+});
+console.log(filteredArray);
+
+// This will return the same as the method above, but with much less code, because of the arrow function.
+const arrowFunctionShines = prices.filter(price => price > 6);
+console.log(arrowFunctionShines);
+
+// The reduce method is one of the methods that you must know.
+// It is used to reduce an array to a single value.
+// It takes a function as an argument and that function will be executed on every element in the array.
+let sum = 0;
+prices.forEach((price) => {
+    sum += price;
+});
+console.log(sum);
+
+// This is the same as the forEach loop above, but with the reduce method.
+// const sum2 = prices.reduce((prevValue, curValue, curIndex, prices) => {
+//     return prevValue + curValue;
+// }, 0);
+// This is shorter than the reduce method above.
+// The 0 at the end of the reduce method below is the initial value and can be any number.
+// It is basically the same as saying let sum = 0 as shown in the forEach loop above.
+const sum2 = prices.reduce((prevValue, curValue) => prevValue + curValue, 0);
+console.log(sum2);
+
+// Chaining Methods in JavaScript
+// With all these useful array methods you learned about, it's important to understand how you can combine them. 
+// Let's take map() and reduce() as an example:
+
+const originalArray1 = [{price: 10.99}, {price: 5.99}, {price: 29.99}];
+const transformedArray = originalArray1.map(obj => obj.price); // produces [10.99, 5.99, 29.99]
+const sum1 = transformedArray.reduce((sumVal, curVal) => sumVal + curVal, 0); // => 46.97
+
+// Of course, you could skip the map step and just add the extraction logic to reduce():
+
+const originalArray2 = [{price: 10.99}, {price: 5.99}, {price: 29.99}];
+const sum3 = originalArray2.reduce((sumVal, curVal) => sumVal + curVal.price, 0); // => 46.97
+
+// But let's say you have a more complex extraction logic and hence want to split this into multiple method calls. 
+// Or you have a re-usable map function which you want to be able to use in different places of your app. 
+// Then you can still write the initial example in a more concise way if you leverage method chaining:
+
+const originalArray3 = [{price: 10.99}, {price: 5.99}, {price: 29.99}];
+const sum4 = originalArray3.map(obj => obj.price)
+    .reduce((sumVal, curVal) => sumVal + curVal, 0); // => 46.97
+
+// We call .reduce() directly on the result of map() (which produces an array, that's why this is possible). 
+// Hence we can avoid storing the mapped array in a separate constant or variable that we might not need in any 
+// other place.
+

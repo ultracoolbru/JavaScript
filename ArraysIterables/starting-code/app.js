@@ -156,7 +156,7 @@ console.log(taxAdjustedPrices);
 for (const [index, price] of prices.entries()) {
     const priceObj = { index: index, taxAdjPrice: price * (1 + tax) };
     taxAdjustedPrices.push(priceObj);
-}   
+}
 console.log(taxAdjustedPrices);
 
 // This is a forEach loop.
@@ -192,7 +192,7 @@ const ascSortedPrices = prices.sort((a, b) => {
     // }
 
     if (a > b) {
-        return 1;  
+        return 1;
     } else if (a === b) {
         return 0;
     } else {
@@ -238,20 +238,20 @@ console.log(sum2);
 // With all these useful array methods you learned about, it's important to understand how you can combine them. 
 // Let's take map() and reduce() as an example:
 
-const originalArray1 = [{price: 10.99}, {price: 5.99}, {price: 29.99}];
+const originalArray1 = [{ price: 10.99 }, { price: 5.99 }, { price: 29.99 }];
 const transformedArray = originalArray1.map(obj => obj.price); // produces [10.99, 5.99, 29.99]
 const sum1 = transformedArray.reduce((sumVal, curVal) => sumVal + curVal, 0); // => 46.97
 
 // Of course, you could skip the map step and just add the extraction logic to reduce():
 
-const originalArray2 = [{price: 10.99}, {price: 5.99}, {price: 29.99}];
+const originalArray2 = [{ price: 10.99 }, { price: 5.99 }, { price: 29.99 }];
 const sum3 = originalArray2.reduce((sumVal, curVal) => sumVal + curVal.price, 0); // => 46.97
 
 // But let's say you have a more complex extraction logic and hence want to split this into multiple method calls. 
 // Or you have a re-usable map function which you want to be able to use in different places of your app. 
 // Then you can still write the initial example in a more concise way if you leverage method chaining:
 
-const originalArray3 = [{price: 10.99}, {price: 5.99}, {price: 29.99}];
+const originalArray3 = [{ price: 10.99 }, { price: 5.99 }, { price: 29.99 }];
 const sum4 = originalArray3.map(obj => obj.price)
     .reduce((sumVal, curVal) => sumVal + curVal, 0); // => 46.97
 
@@ -259,3 +259,157 @@ const sum4 = originalArray3.map(obj => obj.price)
 // Hence we can avoid storing the mapped array in a separate constant or variable that we might not need in any 
 // other place.
 
+const data = 'new york;10.99;2000';
+// This will return an array with the following values:
+// [ 'new york', '10.99', '2000' ]
+console.log(data.split(';'));
+
+const transformedData = data.split(';');
+// This will convert element 1 in the array to a number.
+transformedData[1] = +transformedData[1];
+console.log(transformedData);
+
+const changeFormat = data.split(';');
+changeFormat.map((value, index) => {
+    if (index === 0) {
+        const convertedData = { city: changeFormat[index], price: +changeFormat[index + 1], year: +changeFormat[index + 2] };
+        console.log(convertedData);
+    }
+});
+
+// Array Join
+// This will return an array that has been joined/merged.
+const nameFragment = ['Edward', 'Whitehead'];
+console.log(nameFragment.join(' '));
+
+// Array Spread Operator
+// The spread operator is used to copy an array, for example the above array, is copied below.
+const spreadOperator = [...nameFragment, 'Mr'];
+console.log(nameFragment, spreadOperator);
+
+//  Another example of the spread operator.
+console.log(Math.min(...prices));
+
+const persons = [{ name: 'Edward', age: 49, hobbies: ['Coding', 'Cycling'] }, { name: 'Jason', age: 1, hobbies: [] }];
+// Using map will create a new object of the persons array.
+// It is important to remember that when copying nested elements, you must use the spread operator 
+// to copy the nested elements as well but try and avoid infinite loops.
+const copiedPersons = [...persons.map(person => ({ name: person.name, age: person.age, hobbies: [...person.hobbies] }))];
+console.log(persons, copiedPersons);
+
+// Array Destructuring
+// This is a way to extract elements from an array and store them in variables.
+// This will extract the first two elements from the array and store them in the variables below.
+const [firstName, lastName] = nameFragment;
+console.log(firstName, lastName);
+
+const newNameFragment = ['Edward', 'Whitehead', 'Mr', 30];
+// This will extract the first two elements from the array and store them in the variables and then the remaining items
+// will be stored in the 'others' variable.
+// The '...' is the rest operator.
+// Elements are extracted from left to right.
+const [firstName1, lastName1, ...others] = newNameFragment;
+console.log(firstName1, lastName1, others);
+
+// Arrays
+// Stores nested data of any type and length.
+// Arrays are iterable.
+// Order is guaranteed, duplicates are allowed and elements are zero-indexed.
+
+// Maps & Sets
+
+// Maps
+// Maps stored key-value pairs of any kind and any key values are allowed.
+// Maps are iterable.
+// Order is guaranteed, duplicate keys are not allowed and elements are zero-indexed.
+// Maps can be used to store some complex data structures.
+const user = { name: 'Edward' };
+const visits = { visits: 10 };
+
+// const somePersonData = new Map([[user, visits]]);
+const somePersonData  = new Map([[0, user], [1, visits], [2, 'Some String']]);
+somePersonData.set(0, [{date: 'today', time: 'now'}]);
+
+// console.log(somePersonData);
+console.log(somePersonData.get(user));
+
+for (const entry of somePersonData.entries()) {
+    console.log(entry);
+}
+
+// Another way of gettiing key/value pairs from a map instead of using 'entry' like above.
+for (const [key, value] of somePersonData.entries()) {
+    console.log(key, value);
+}
+
+// To just get the keys from a map
+for (const key of somePersonData.keys()) {
+    console.log(key);
+}
+
+// To just get the values from a map
+for (const value of somePersonData.values()) {
+    console.log(value);
+}
+
+// Sets
+// Sets store unique values of any type.
+// Sets are iterable.
+// Order is not guaranteed, duplicates are not allowed and elements are not zero-indexed.
+// Theoretically, you will not necessarily use Sets to store data, but rather to check if a value is in a set or not.
+// Sets are great if you want unique values in an array.
+const ids = new Set([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+ids.add(6);
+ids.delete(2);
+
+// Returns true if the value is in the set.
+console.log(ids.has(1));
+
+// returns an iterator of arrays with the key and value.
+const entriesValues = ids.entries();
+for (const entry of entriesValues) {
+    console.log(entry);
+}
+
+// returns an iterator of the values.
+const values = ids.values();
+for (const value of values) {
+    console.log(value);
+}
+
+// Maps vs Objects
+// Maps are iterable, objects are not.
+// Maps can use any values (and types) as keys, objects can only use strings, numbers or symbols.
+// Maps have better performance for large sets of data, objects have better performance for small sets of data.
+// Maps perform better when adding or removing data, objects perform quicker to create.
+// 98% of the time you will use Maps and Objects and not Sets because Sets are best for unique values.
+
+// WeakMaps & WeakSets
+// WeakMaps and WeakSets are similar to Maps and Sets but they have some differences, more importantly though,
+// they are cleared from memory when they are not used anymore, via the garbage collector.
+
+// WeakMaps
+let key = { id: 1 };
+const _anotherPersonsData = new WeakMap();
+_anotherPersonsData.set(key, { name: 'Edward' });
+
+// ... some code here
+
+// This will clear key from memory, via the garbage collector.
+key = null;
+
+console.log(_anotherPersonsData);
+
+// WeakSets
+// WeakSets create an opportunity to remove items from memory (person below) when they are no longer needed
+// and are not referenced anywhere else in the code.
+let person = { name: 'Edward' };
+const _persons = new WeakSet();
+_persons.add(person);
+
+//... some code
+
+// This will clear person from memory, via the garbage collector.
+person = null; 
+
+console.log(_persons);

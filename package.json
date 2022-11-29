@@ -1,0 +1,20 @@
+{
+  "name": "javascript",
+  "version": "1.0.0",
+  "description": "A collection of JavaScript course module lessons completed.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ultracoolbru/JavaScript.git"
+  },
+  "author": "Edward Whitehead",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ultracoolbru/JavaScript/issues"
+  },
+  "homepage": "https://github.com/ultracoolbru/JavaScript#readme",
+  "type": "module"
+}

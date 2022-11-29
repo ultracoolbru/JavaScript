@@ -321,7 +321,7 @@ function removeOccurrences(array, num) {
         if (array[i] == num) {
             array.splice(i, 1);
             i--;
-        }        
+        }
     }
     console.log(array);
 
@@ -332,17 +332,97 @@ function removeOccurrences(array, num) {
 }
 removeOccurrences([1, 2, 2, 3, 4, 3], 2);
 
+// const orders = [
+//     { pizzas: 3 },
+//     { pizzas: 5 },
+//     { pizzas: 10 },
+// ];
+
+// function numberOfPizzas(orders) {
+//     let result = 0;
+//     orders.forEach(pizza => {
+//         result += pizza.pizzas;
+//     });
+//     return result;
+// }
+
+// numberOfPizzas(orders);
+
+const ORDER_TYPES = {
+    PIZZA: 0,
+    DOUBLE_WHOPPER_PIZZA: 1,
+    EXTRA_CHEESY_PIZZA: 3
+}
 const orders = [
-    { pizzas: 3 },
-    { pizzas: 5 },
-    { pizzas: 10 },
-]
+    { pizzas: 3, type: ORDER_TYPES.PIZZA, extraCheese: true },
+    { pizzas: 5, type: ORDER_TYPES.PIZZA, extraCheese: false },
+    { pizzas: 10, type: ORDER_TYPES.PIZZA, extraCheese: true },
+];
 function numberOfPizzas(orders) {
     let result = 0;
     orders.forEach(pizza => {
-        result += pizza.pizzas;
+        if (pizza.type === ORDER_TYPES.PIZZA) result += pizza.pizzas;
     });
     return result;
 }
-
 numberOfPizzas(orders);
+
+function numberOfKeys(object) {
+    let i = 0;
+    for (let key in object) {
+        if (Object.keys(key)) i++;
+    }
+    return i;
+}
+numberOfKeys({ a: 1, b: 2, c: 3 });
+
+function halfValue(numbers) {
+    let result = [];
+    if (numbers.length === 0) return [];
+    for (let i = 0; i < numbers.length; i++) {
+        let value = 0;
+        if (numbers[i] % 2 !== 0) result.push((numbers[i] + 1) / 2);
+        if (numbers[i] % 2 === 0) result.push(numbers[i] / 2);
+        //     value = (numbers[i] + 1) / 2
+        //     result.push(value);
+        // } else {
+        //     value = numbers[i] / 2;
+        //     result.push(value);
+        // }
+    }
+    return result;
+}
+console.log(halfValue([11, 13, 15, 17]));
+
+function countC(str) {
+    let count = 0;
+    for (let i = 0; i < str.length; i++) {
+        if (str[i] === 'c' || str[i] === 'C') count++;
+    }
+    return count;   
+}
+console.log(countC('Circus'));
+
+function countVowels(str) {
+    let count = 0;
+    for (let i = 0; i < str.length; i++) {
+        if (str[i].toLowerCase() === 'a' || str[i].toLowerCase() === 'e' || str[i].toLowerCase() === 'i' || str[i].toLowerCase() === 'o' || str[i].toLowerCase() === 'u') count++;
+    }
+    return count;
+}
+console.log(countVowels('Igloo'));
+
+function reverse(string) {
+    let result = '';
+    for (let i = string.length - 1; i >= 0; i--) result += string[i];
+    return result;   
+}
+console.log(reverse('Hello'));
+
+function isPalindrome(string) {
+    let result = '';
+    for (let i = string.length - 1; i >= 0; i--) result += string[i];
+    if (result === string) return true;
+    return false;
+}
+console.log(isPalindrome('racecar'));

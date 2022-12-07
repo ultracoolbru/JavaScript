@@ -222,3 +222,11 @@ class App {
 
 App.init();
 
+const person = { name: 'Edward'};
+console.log(Object.getOwnPropertyDescriptors(person));
+
+// Object.defineProperty is a way of 'locking' an object property so that it cannot be changed.
+// 
+Object.defineProperty(person, 'name', { configurable: true, enumerable: true, value: person.name, writable: false });
+console.log(person.name = 'Ed');
+console.log(person.name);

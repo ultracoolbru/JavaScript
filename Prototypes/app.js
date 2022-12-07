@@ -1,9 +1,19 @@
+class Age {
+    constructor() {
+        this.age = 49;
+    }
+
+    printAge() {
+        console.log(this.age);
+    }
+}
+
 // Classic class.
-class Person {
+class Person extends Age {
     name = 'Edward';
 
     constructor() {
-        this.age = 49;
+        super();
     }
 
     greet() {
@@ -12,6 +22,8 @@ class Person {
 }
 const person = new Person();
 person.greet();
+console.log(person.age);
+console.log(person.__proto__);
 
 // This is a constructor function and is commonly used in JavaScript.
 // This works the same as the class above, but classes do more and the function below is more verbose.
@@ -25,8 +37,7 @@ function ConstructorPerson() {
 const constructorPerson = new ConstructorPerson();
 constructorPerson.greet();
 
-//constructorPerson.__proto__ === ConstructorPerson.prototype; // true
-console.log(constructorPerson.__proto__ === ConstructorPerson.prototype); // ConstructorPerson {}
+console.log(constructorPerson.__proto__ === ConstructorPerson.prototype);
 
 // This is a fallback of the constructor function above.
 // This is a prototype and is commonly used in JavaScript.
@@ -36,3 +47,4 @@ ConstructorPerson.prototype.printAge = function() {
 }
 
 constructorPerson.printAge(); // 49
+console.log(constructorPerson.__proto__);

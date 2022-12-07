@@ -24,3 +24,15 @@ function ConstructorPerson() {
 }
 const constructorPerson = new ConstructorPerson();
 constructorPerson.greet();
+
+//constructorPerson.__proto__ === ConstructorPerson.prototype; // true
+console.log(constructorPerson.__proto__ === ConstructorPerson.prototype); // ConstructorPerson {}
+
+// This is a fallback of the constructor function above.
+// This is a prototype and is commonly used in JavaScript.
+// A prototype can be seen as the "extends" keyword in a class that is extending a base class.
+ConstructorPerson.prototype.printAge = function() {
+    console.log(this.age);
+}
+
+constructorPerson.printAge(); // 49

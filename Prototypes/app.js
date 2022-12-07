@@ -48,3 +48,14 @@ ConstructorPerson.prototype.printAge = function() {
 
 constructorPerson.printAge(); // 49
 console.log(constructorPerson.__proto__);
+console.log(ConstructorPerson.prototype);
+
+const o = new Object();
+Object.prototype.printAge = function() {
+    console.log("boom");
+}
+o.printAge(); // boom
+
+// This is the last level of the prototype chain.
+console.log(o.__proto__);
+console.log(Object.prototype);
